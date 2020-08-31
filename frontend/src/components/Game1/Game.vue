@@ -13,7 +13,7 @@
             </div>
         </div>
         <div v-else>
-            {{(this.playerCount % this.peopleNum)+1}}번째 플레이어가 당첨 되셨습니다.<br/>
+            {{OnResult()}}
             <button @click="OnClickReset">다시하기</button>
             <button @click="OnClickList">목록으로</button>
         </div>
@@ -54,6 +54,9 @@ export default {
         },
         OnClickList(){
             //목록 나오면 추가
+        },
+        OnResult(){
+            alert((this.playerCount % this.peopleNum)+1+'번째 플레이어 당첨');
         }
     },
     components:{
@@ -71,5 +74,5 @@ export default {
 </script>
 
 <style>
-
+    
 </style>
