@@ -16,7 +16,7 @@ export default {
   },
   methods:{
     test (){
-      axios.get('http://localhost:8000/members')
+      axios.get('http://localhost:8000/test')
     }
   }
 }
