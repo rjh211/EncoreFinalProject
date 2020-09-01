@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -32,7 +33,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
 
 
 @RestController
@@ -51,10 +51,11 @@ public class getWordAPI{
         map.put("action", "create");
         return map;
     }
-    @GetMapping("/test")
-    public String addmember(){
+    @GetMapping("/callDictAPI")
+    public String addmember(@RequestParam("word") String word){
         StringBuffer result = new StringBuffer();
         try{
+            q = "&q=" + word;
             String urlStr=DEFAULT_URL+API_KEY+type+part+q+sort;
             URL url = new URL(urlStr);
 
@@ -64,7 +65,6 @@ public class getWordAPI{
             BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 
             String returnLine;
-            result.append("<xmp>");
             while((returnLine=br.readLine()) != null){
                 result.append((returnLine+"\n"));
             }
@@ -72,8 +72,7 @@ public class getWordAPI{
         }catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println(result+"</xmp>");
-        return result+"</xmp>";
+        return result.toString();
     }
     public RedirectView temp(){
         String fullUrl = DEFAULT_URL+API_KEY+type+part+q+sort;

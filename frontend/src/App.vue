@@ -1,23 +1,21 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Game/>
-    <button @click="test">test</button>
+    <Game2/>
   </div>
 </template>
 
 <script>
-import Game from './components/Game1/Game'
-import axios from 'axios'
+//import Game from './components/Game1/Game'
+import Game2 from './components/Game2/Game'
 export default {
   name: 'App',
   components: {
-    Game
+    //Game,
+    Game2
   },
   methods:{
-    test (){
-      axios.get('http://localhost:8000/test')
-    }
+
   }
 }
 </script>
