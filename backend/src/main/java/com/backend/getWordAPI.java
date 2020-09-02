@@ -65,7 +65,7 @@ public class getWordAPI{
             BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 
             String returnLine;
-            while((returnLine=br.readLine()) != null){
+            while((returnLine=br. readLine()) != null){
                 result.append((returnLine+"\n"));
             }
             urlconnection.disconnect();
