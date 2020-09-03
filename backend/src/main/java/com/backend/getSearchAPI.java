@@ -47,7 +47,7 @@ public class getSearchAPI{
     private String clientId = "lYK2DHzFa5rO9aVz3vF9";
     private String clientSecert = "WQUbtyQgTj";
     @GetMapping(value="/callSearchAPI")
-    public boolean getSearch(@RequestParam("word") String word, @RequestParam("count") int count){
+    public ArrayList getSearch(@RequestParam("word") String word, @RequestParam("count") int count){
         String text = null;
         try {
             text = URLEncoder.encode(word, "UTF-8");
@@ -64,11 +64,7 @@ public class getSearchAPI{
 
         JsonParser jsonParser = JsonParserFactory.getJsonParser();
         Map<String, Object> body = jsonParser.parseMap(responseBody);
-        System.out.println(body);
-        if(body.get("items").toString().contains("백종원")){
-            return true;
-        }
-        return false;
+        return (ArrayList)body.get("items");
     }
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){
@@ -120,3 +116,4 @@ public class getSearchAPI{
         }
     }
 }
+
