@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,12 +41,13 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.backend.getAPIKey;
+import com.backend.getAPIKey.KeyType;
 
 @RestController
 @CrossOrigin(origins = "*") // @CrossOrigin(origins = "http://localhost:8080")
 public class getSearchAPI{
-    private String clientId = "lYK2DHzFa5rO9aVz3vF9";
-    private String clientSecert = "WQUbtyQgTj";
+    getAPIKey getkey = new getAPIKey();
     @GetMapping(value="/callSearchAPI")
     public ArrayList getSearch(@RequestParam("word") String word, @RequestParam("count") int count){
         String text = null;
@@ -56,10 +58,9 @@ public class getSearchAPI{
         }
 
         String apiUrl = "https://openapi.naver.com/v1/search/blog?query=" + text + "&display="+ count;
-
         Map<String,String> requestHeaders = new HashMap();
-        requestHeaders.put("X-Naver-Client-Id", clientId);
-        requestHeaders.put("X-Naver-Client-Secret", clientSecert);
+        requestHeaders.put("X-Naver-Client-Id", getkey.GetKey(KeyType.SearchId));
+        requestHeaders.put("X-Naver-Client-Secret", getkey.GetKey(KeyType.SearchSecret));
         String responseBody = get(apiUrl, requestHeaders);
 
         JsonParser jsonParser = JsonParserFactory.getJsonParser();
