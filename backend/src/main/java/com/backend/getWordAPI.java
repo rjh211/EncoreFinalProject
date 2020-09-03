@@ -34,12 +34,15 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.backend.getAPIKey;
+import com.backend.getAPIKey.KeyType;
 
 @RestController
 @CrossOrigin(origins = "*") // @CrossOrigin(origins = "http://localhost:8080")
 public class getWordAPI{
+    getAPIKey getkey = new getAPIKey();
     private String DEFAULT_URL = "https://opendict.korean.go.kr/api/search?";
-    private final String API_KEY = "key=DC2720C7B4418DF5AA2591649B89DA6E";
+    private final String API_KEY = "key="+getkey.GetKey(KeyType.DictKey);
     private String type = "&target_type=search";
     private String part = "&part=word";
     private String q = "&q=나무";
